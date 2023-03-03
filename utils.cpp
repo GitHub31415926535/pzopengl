@@ -1,6 +1,6 @@
 #include "utils.h"
 
-void printShaderLog(GLuint shader) {
+void Utils::printShaderLog(GLuint shader) {
 	int len = 0;
 	int chWrittn = 0;
 	char* log;
@@ -13,7 +13,7 @@ void printShaderLog(GLuint shader) {
 	}
 }
 
-void printProgramLog(int prog) {
+void Utils::printProgramLog(int prog) {
 	int len = 0;
 	int chWrittn = 0;
 	char* log;
@@ -26,7 +26,7 @@ void printProgramLog(int prog) {
 	}
 }
 
-bool checkOpenGLError() {
+bool Utils::checkOpenGLError() {
 	bool findError = false;
 	int glErr = glGetError();
 	while (glErr != GL_NO_ERROR) {
@@ -51,7 +51,7 @@ std::string readShaderSource(const char* filePath) {
 	return content;
 }
 
-GLuint createShaderProgram(const char* vp, const char* fp) {
+GLuint Utils::createShaderProgram(const char* vp, const char* fp) {
 	GLint vertCompiled;
 	GLint fragCompiled;
 	GLint linked;
@@ -109,15 +109,22 @@ GLuint createShaderProgram(const char* vp, const char* fp) {
 	return vfProgram;
 }
 
-GLuint createShaderProgram(const char* vp, const char* gp, const char* fp) {
+GLuint Utils::createShaderProgram(const char* vp, const char* gp, const char* fp) {
 	return 0;
 }
 
-GLuint createShaderProgram(const char* vp, const char* tCs, const char* tEs, const char* fp) {
+GLuint Utils::createShaderProgram(const char* vp, const char* tCs, const char* tEs, const char* fp) {
 	return 0;
 }
 
-GLuint createShaderProgram(const char* vp, const char* tCs, const char* tEs, const char* gp,
+GLuint Utils::createShaderProgram(const char* vp, const char* tCs, const char* tEs, const char* gp,
 	const char* fp) {
 	return 0;
+}
+
+GLuint Utils::loadTexture(const char* texImagePath) {
+	GLuint textureID;
+	textureID = SOIL_load_OGL_texture(texImagePath, SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);//生成实际纹理对象
+	if (textureID == 0) { std::cout << "could not find texture file:"<< texImagePath << std::endl; }
+	return textureID;
 }

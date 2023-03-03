@@ -1,16 +1,13 @@
 #pragma once
 
-#include <cmath>
-#include <glm/glm.hpp>
-#include <glm\gtc\type_ptr.hpp>
-#include <glm\gtc\matrix_transform.hpp>
-#include <glm\ext\matrix_clip_space.hpp>
 #include "utils.h"
 class Cube
 {
 public:
 	void init(GLFWwindow* window);
-	void display(GLFWwindow* window, const double& currentTime);
+	void display(GLFWwindow* window, const double& currentTime);//1个
+	void display_2(GLFWwindow* window, const double& currentTime);//24个
+	void display_3(GLFWwindow* window, const double& currentTime);//实例化10000个
 
 protected:
 	void setupVertices(void);
@@ -28,5 +25,9 @@ private:
 	int width, height;
 	float aspect;
 	glm::mat4 pMat, mMat, vMat, mvMat, tMat, rMat;
+
+	//use for 多个立方体，实例化渲染
+	GLuint mLoc, vLoc, tfLoc;
+	float timeFactor;
 };
 
